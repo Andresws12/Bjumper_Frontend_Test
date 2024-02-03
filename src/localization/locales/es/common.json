@@ -8,8 +8,8 @@
     "notifications": {
       "success": {},
       "error": {
-        "apiGithubUserError": "El usuario no existe o hubo un error al buscarlo.",
-        "apiGithubReposError": "El usuario no tiene repositorios."
+        "apiGithubUserError": "El usuario {name} no existe o hubo un error al buscarlo.",
+        "apiGithubReposError": "El usuario {name} no tiene repositorios."
       }
     },
     "images": {},

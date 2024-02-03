@@ -23,11 +23,15 @@
         src="@/assets/icons/close.svg"
         alt="Clear"
         width="20"
-        @click="clearSearchQuery"
+        @click="clearSearchQuery(false)"
       />
     </div>
     <div v-if="error && searchQuery" class="search-github-users__error">
-      {{ error }}
+      {{
+        $t('common.notifications.error.apiGithubUserError', {
+          name: '@' + searchQuery,
+        })
+      }}
     </div>
     <div
       v-else-if="user && searchQuery"
@@ -39,7 +43,11 @@
         :repos="repos"
       />
       <div v-if="errorRepos && searchQuery" class="search-github-users__error">
-        {{ errorRepos }}
+        {{
+          $t('common.notifications.error.apiGithubReposError', {
+            name: '@' + searchQuery,
+          })
+        }}
       </div>
       <GithubSkeleton v-if="loading" />
     </div>
@@ -51,32 +59,32 @@ import UserPersonalDataGithub from './components/UserPersonalDataGithub.vue';
 import UserRepositoriesDataGithub from './components/UserRepositoriesDataGithub.vue';
 import GithubSkeleton from '@/components/common/GithubSkeleton.vue';
 
-import { useI18n } from 'vue-i18n';
-
 import { UserData, RepositoriesData } from '@/models/user/UserData';
 import {
   getUsersService,
   getRepositoriesService,
 } from '@/webservices/GithubWebservice';
-import { ref, Ref, watch } from 'vue';
-
-const { t, locale } = useI18n();
+import { ref, Ref } from 'vue';
 
 const searchQuery: Ref<string> = ref('');
 const user: Ref<UserData | null> = ref(null);
 const repos: Ref<RepositoriesData[]> = ref([]);
-const error: Ref<string> = ref('');
-const errorRepos: Ref<string> = ref('');
+const error: Ref<boolean> = ref(false);
+const errorRepos: Ref<boolean> = ref(false);
 const loading: Ref<boolean> = ref(false);
 
 let debounceTimeout: ReturnType<typeof setTimeout> | null = null;
 
-// The `clearSearchQuery` function is responsible for clearing the search query and resetting the user
-// and repositories data.
-function clearSearchQuery() {
-  searchQuery.value = '';
+// The `clearSearchQuery` function is responsible for clearing the search query and resetting the user,
+// repositories, and error states.
+function clearSearchQuery(isWriting: boolean) {
+  if (!isWriting) {
+    searchQuery.value = '';
+  }
   user.value = null;
   repos.value = [];
+  error.value = false;
+  errorRepos.value = false;
 }
 
 // The `searchUser` function is an asynchronous function that is responsible for searching for a user
@@ -84,6 +92,8 @@ function clearSearchQuery() {
 async function searchUser() {
   try {
     loading.value = true;
+    error.value = false;
+    errorRepos.value = false;
 
     // Get the user data
     const userResponse = await getUsersService({ name: searchQuery.value });
@@ -98,23 +108,24 @@ async function searchUser() {
 
       if (reposResponse.length > 0) {
         repos.value = await reposResponse;
-        errorRepos.value = '';
+        errorRepos.value = false;
       } else {
         repos.value = [];
-        errorRepos.value = t('common.notifications.error.apiGithubReposError');
+        errorRepos.value = true;
       }
     }
 
     loading.value = false;
   } catch (err) {
     console.error(err);
-    error.value = t('common.notifications.error.apiGithubUserError');
+    error.value = true;
     loading.value = false;
   }
 }
 
 // The `debounceSearchUser` function is responsible for debouncing the `searchUser` function.
 function debounceSearchUser() {
+  clearSearchQuery(true);
   return new Promise(resolve => {
     // Clear the previous debounce timeout
     if (debounceTimeout) {
@@ -127,18 +138,6 @@ function debounceSearchUser() {
     }, 500);
   });
 }
-// Watch the `locale` value to reset the error messages when the locale changes
-watch(
-  () => locale.value,
-  () => {
-    if (error.value) {
-      error.value = t('common.notifications.error.apiGithubUserError');
-    }
-    if (errorRepos.value) {
-      errorRepos.value = t('common.notifications.error.apiGithubReposError');
-    }
-  }
-);
 </script>
 
 <style lang="scss" scoped>

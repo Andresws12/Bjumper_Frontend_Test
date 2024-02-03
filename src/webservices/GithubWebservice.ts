@@ -21,10 +21,11 @@ export const getUsersService = async (
 
 export const getRepositoriesService = async (
   params: GithubRequest
-): Promise<RepositoriesData> => {
+): Promise<RepositoriesData[]> => {
   try {
-    const response: AxiosResponse<RepositoriesData> =
-      await axios.get<RepositoriesData>(`${baseUrl}/${params.name}/repos`);
+    const response: AxiosResponse<RepositoriesData[]> = await axios.get<
+      RepositoriesData[]
+    >(`${baseUrl}/${params.name}/repos`);
     return response.data;
   } catch (error) {
     throw new Error('Failed to fetch repositories data');

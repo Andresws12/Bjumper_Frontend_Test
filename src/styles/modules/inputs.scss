@@ -1,0 +1,14 @@
+.input {
+  padding: 16px;
+  border: 1px solid $gray;
+  border-radius: 8px;
+  width: 100%;
+  padding-right: 40px;
+
+  &:focus,
+  &:active {
+    border-color: $white;
+    box-shadow: $input-shadow;
+    outline: none;
+  }
+}

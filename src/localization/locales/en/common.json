@@ -7,7 +7,10 @@
     "buttons": {},
     "notifications": {
       "success": {},
-      "error": {}
+      "error": {
+        "apiGithubUserError": "The user does not exist or there was an error while searching for it.",
+        "apiGithubReposError": "The user does have not repositories."
+      }
     },
     "images": {},
     "languages": { "spanish": "Spanish", "english": "English" },

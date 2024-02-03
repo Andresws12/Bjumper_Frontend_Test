@@ -2,6 +2,9 @@
   "views": {
     "maintenancePage": {},
     "home": {
+      "input": {
+        "placeholder": "Search github username"
+      },
       "github": {
         "forks": "Forks: ",
         "stars": "Stars: "

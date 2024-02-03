@@ -1,0 +1,15 @@
+{
+  "views": {
+    "maintenancePage": {},
+    "home": {
+      "github": {
+        "forks": "Ramas: ",
+        "stars": "Estrellas: "
+      },
+      "user": {
+        "followers": "Seguidores: ",
+        "repositories": "Repositorios: "
+      }
+    }
+  }
+}

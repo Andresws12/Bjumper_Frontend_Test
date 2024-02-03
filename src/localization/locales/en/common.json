@@ -1,0 +1,16 @@
+{
+  "common": {
+    "components": {},
+    "title": {},
+    "subtitle": {},
+    "inputs": {},
+    "buttons": {},
+    "notifications": {
+      "success": {},
+      "error": {}
+    },
+    "images": {},
+    "languages": { "spanish": "Spanish", "english": "English" },
+    "errors": {}
+  }
+}

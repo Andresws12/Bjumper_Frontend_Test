@@ -54,7 +54,6 @@ This test is designed to evaluate the skills of frontend candidates with a focus
 > - [Vue 3][vue]
 > - [Pinia][pinia]
 > - [Typescript][typescript]
-> - [VeeValidate][vee-validate]
 > - [VueUse][vue-use]
 > - [Fontawesome][fontawesome]
 > - [Sass][sass]
@@ -105,7 +104,7 @@ This section details everything you need to install the project and the steps to
    code .
    pnpm install
    ```
-3. Prepare husky with the correct permissions
+3. Prepare husky and pre-commit with the correct permissions
    ```sh
    pnpm kusky:prepare
    ```
@@ -310,7 +309,6 @@ I have prepared simple testing and formatting commands to make our project more 
 [vue]: https://vuejs.org/guide/quick-start.html
 [pinia]: https://pinia.vuejs.org/introduction.html
 [Vs Code Text Editor]: https://code.visualstudio.com/
-[vee-validate]: https://vee-validate.logaretm.com/v4/
 [NPM]: https://www.bambu-mobile.com/que-es-npm-de-node-js/
 [WSL 2]: https://learn.microsoft.com/es-es/windows/wsl/about
 [eslint]: https://eslint.org/docs/latest/user-guide/getting-started

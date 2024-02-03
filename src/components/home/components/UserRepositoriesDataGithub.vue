@@ -11,8 +11,6 @@
 <script lang="ts" setup>
 import UserRepositoryDataGithub from './UserRepositoryDataGithub.vue';
 
-import { defineProps } from 'vue';
-
 const props = defineProps({
   repos: {
     type: Object,

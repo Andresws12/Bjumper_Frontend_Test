@@ -1,8 +1,9 @@
 <template>
-  <article class="search-github-users">
+  <article class="search-github-users" data-cy="home-search-github-users">
     <div class="search-github-users__logo-container">
       <img
         class="search-github-users__logo"
+        data-cy="home-search-github-users-logo"
         src="@/assets/icons/bjumperLogo.svg"
         alt="Bjumper logo"
         title="Bjumper logo"
@@ -13,6 +14,7 @@
       <input
         v-model="searchQuery"
         class="search-github-users__input input"
+        data-cy="home-search-github-users-input"
         type="text"
         :placeholder="$t('views.home.input.placeholder')"
         @keyup="debounceSearchUser"
@@ -21,12 +23,17 @@
         v-if="searchQuery || user"
         class="search-github-users__clear-icon"
         src="@/assets/icons/close.svg"
+        data-cy="home-search-github-users-clear-icon"
         alt="Clear"
         width="20"
         @click="clearSearchQuery(false)"
       />
     </div>
-    <div v-if="error && searchQuery" class="search-github-users__error">
+    <div
+      v-if="error && searchQuery"
+      class="search-github-users__error"
+      data-cy="home-search-github-users-user-error"
+    >
       {{
         $t('common.notifications.error.apiGithubUserError', {
           name: '@' + searchQuery,
@@ -36,13 +43,23 @@
     <div
       v-else-if="user && searchQuery"
       class="search-github-users__data-content"
+      data-cy="home-search-github-users-user-data-content"
     >
-      <UserPersonalDataGithub v-if="!loading" :user="user" />
+      <UserPersonalDataGithub
+        v-if="!loading"
+        :user="user"
+        data-cy="home-search-github-users-personal-data"
+      />
       <UserRepositoriesDataGithub
         v-if="!loading && repos.length > 0"
         :repos="repos"
+        data-cy="home-search-github-users-repositories-data"
       />
-      <div v-if="errorRepos && searchQuery" class="search-github-users__error">
+      <div
+        v-if="errorRepos && searchQuery"
+        class="search-github-users__error"
+        data-cy="home-search-github-users-repositories-error"
+      >
         {{
           $t('common.notifications.error.apiGithubReposError', {
             name: '@' + searchQuery,
@@ -64,6 +81,7 @@ import {
   getUsersService,
   getRepositoriesService,
 } from '@/webservices/GithubWebservice';
+
 import { ref, Ref } from 'vue';
 
 const searchQuery: Ref<string> = ref('');

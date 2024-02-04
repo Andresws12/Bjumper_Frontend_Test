@@ -8,7 +8,6 @@ const i18n = i18nGlobal;
 describe('Basic translations test', () => {
   it('Default ES locale is working', () => {
     expect(i18n.locale).toBe(Locales.EN);
-    // expect(i18n.t('common.title.home')).toBe(messages.en.common.title.home);
   });
 
   it('Basic change of language is working', () => {

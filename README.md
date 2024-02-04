@@ -72,7 +72,7 @@ This section details everything you need to install the project and the steps to
 ### <span id="prerequisites">🚩Prerequisites</span>
 
 > - **Recomends**: Is recommended use [Vs Code Text Editor] and [Vue Language Features (Volar) extension]
-> - **WSL 2** _(Only Windows)_ : Is necessary have a [WSL 2] installed and configured
+> - **WSL 2** _(Only Windows)_ : Is necessary have a [WSL 2] installed and configured to better compatibility
 >   - Run as Administrator in Powershell the command `wsl --install`, if WSL is installed this will show a message indicating that is installed.
 >   - Download in VS Code the extension [WSL Extension].
 >   - Install a Ubuntu version for windows, for example [Ubuntu 22.04.02 LTS]
@@ -119,6 +119,10 @@ Start Vite dev server in the current directory.
     ```sh
     pnpm dev
     ```
+      > If there are a lot of problems on the console, please run the following command in another console:
+      > ```bash
+      > pnpm format
+      > ```
 2.  Check that the service is running
     ```sh
      http://localhost:5173/

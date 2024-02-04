@@ -1,6 +1,10 @@
 import homeSelectors from './utilities/home/home.selectors';
 
 describe('01 HomeView', () => {
+  const inputValue = 'andresws12';
+  const nonExistingUser = 'undefined';
+  const userWithoutRepositories = 'andresws';
+
   beforeEach(() => {
     cy.visit('/');
     cy.get(homeSelectors.searchGitHubUsersInput).clear();
@@ -8,12 +12,12 @@ describe('01 HomeView', () => {
 
   it('01 Home with input value', () => {
     cy.get(homeSelectors.sectionHomePage).should('be.visible');
-    cy.get(homeSelectors.searchGitHubUsersInput).type('andresws12');
+    cy.get(homeSelectors.searchGitHubUsersInput).type(inputValue);
     cy.get(homeSelectors.searchGitHubUsers).should('be.visible');
     cy.get(homeSelectors.searchGitHubUsersLogo).should('be.visible');
     cy.get(homeSelectors.searchGitHubUsersInput).should(
       'have.value',
-      'andresws12'
+      inputValue
     );
     cy.get(homeSelectors.searchGitHubUsersClearIcon).should('be.visible');
     cy.get(homeSelectors.searchGitHubUsersUserError).should('not.exist');
@@ -28,12 +32,12 @@ describe('01 HomeView', () => {
   });
 
   it('02 Home with non-existing user', () => {
-    cy.get(homeSelectors.searchGitHubUsersInput).type('undefined');
+    cy.get(homeSelectors.searchGitHubUsersInput).type(nonExistingUser);
     cy.get(homeSelectors.searchGitHubUsers).should('be.visible');
     cy.get(homeSelectors.searchGitHubUsersLogo).should('be.visible');
     cy.get(homeSelectors.searchGitHubUsersInput).should(
       'have.value',
-      'undefined'
+      nonExistingUser
     );
     cy.get(homeSelectors.searchGitHubUsersClearIcon).should('be.visible');
     cy.get(homeSelectors.searchGitHubUsersUserError).should('be.visible');
@@ -46,12 +50,12 @@ describe('01 HomeView', () => {
   });
 
   it('03 Home with user without repositories', () => {
-    cy.get(homeSelectors.searchGitHubUsersInput).type('andresws');
+    cy.get(homeSelectors.searchGitHubUsersInput).type(userWithoutRepositories);
     cy.get(homeSelectors.searchGitHubUsers).should('be.visible');
     cy.get(homeSelectors.searchGitHubUsersLogo).should('be.visible');
     cy.get(homeSelectors.searchGitHubUsersInput).should(
       'have.value',
-      'andresws'
+      userWithoutRepositories
     );
     cy.get(homeSelectors.searchGitHubUsersClearIcon).should('be.visible');
     cy.get(homeSelectors.searchGitHubUsersUserError).should('not.exist');
